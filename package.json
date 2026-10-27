@@ -1,68 +1,21 @@
 {
   "name": "greenstreak",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "main": "electron/main.cjs",
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "prisma generate && next build",
-    "start": "next start",
-    "desktop:dev": "concurrently -k \"next dev -p 3000\" \"wait-on http://localhost:3000 && electron .\"",
-    "desktop:build": "npm run build && electron-builder --win dir",
-    "desktop:installer": "npm run build && electron-builder --win nsis",
-    "desktop": "electron .",
-    "lint": "next lint",
-    "db:migrate": "prisma migrate dev",
-    "db:generate": "prisma generate",
-    "db:studio": "prisma studio"
-  },
-  "dependencies": {
-    "@prisma/client": "^5.22.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "date-fns": "^4.1.0",
-    "lucide-react": "^0.468.0",
-    "next": "^14.2.15",
-    "next-themes": "^0.4.4",
-    "prisma": "^5.22.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "tailwind-merge": "^2.5.5",
-    "zod": "^3.23.8"
+    "dev": "concurrently -k -n \"server,client\" -c \"blue,green\" \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server run start",
+    "seed": "npm --prefix server run seed",
+    "test": "npm --prefix client run test && npm --prefix server run test",
+    "test:client": "npm --prefix client run test",
+    "test:server": "npm --prefix server run test",
+    "install:all": "npm --prefix server install && npm --prefix client install"
   },
   "devDependencies": {
-    "@types/node": "^20.17.6",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "autoprefixer": "^10.4.20",
-    "concurrently": "^9.1.0",
-    "electron": "^33.2.1",
-    "electron-builder": "^25.1.8",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.15",
-    "typescript": "^5.6.3",
-    "wait-on": "^8.0.1"
-  },
-  "build": {
-    "appId": "com.greenstreak.app",
-    "productName": "GreenStreak",
-    "asar": false,
-    "files": [
-      ".next/**/*",
-      "app/**/*",
-      "components/**/*",
-      "electron/**/*",
-      "generated/**/*",
-      "lib/**/*",
-      "node_modules/**/*",
-      "node_modules/.prisma/**/*",
-      "node_modules/@prisma/engines/**/*",
-      "prisma/**/*",
-      "public/**/*",
-      "next.config.mjs",
-      "package.json"
-    ],
-    "win": { "target": "nsis", "signAndEditExecutable": false },
-    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true }
+    "concurrently": "^9.1.0"
   }
 }

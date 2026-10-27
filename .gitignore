@@ -1,10 +1,30 @@
-node_modules
-.next
-out
-dist
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment variables
 .env
+.env.*
+!.env.example
+server/.env
+client/.env
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Database & generated
 *.db
 *.db-journal
-generated/prisma
+generated/prisma/
 *.tsbuildinfo
+
+# Testing
+coverage/
+
+# Logs & temp
+*.log
 npm-debug.log*
+.DS_Store

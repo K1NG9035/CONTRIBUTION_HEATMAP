@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-manrope: "Manrope", sans-serif;
+  --font-space-grotesk: "Space Grotesk", sans-serif;
+  --ink: 154 22% 16%;
+  --paper: 46 33% 97%;
+  --muted: 150 8% 45%;
+  --line: 42 18% 88%;
+  --lime: 99 48% 49%;
+  --coral: 11 76% 61%;
+}
+
+.dark {
+  --ink: 45 25% 94%;
+  --paper: 154 17% 10%;
+  --muted: 142 8% 64%;
+  --line: 150 10% 23%;
+  --lime: 96 55% 56%;
+  --coral: 11 76% 64%;
+}
+
+* {
+  border-color: hsl(var(--line));
+}
+
+body {
+  background: hsl(var(--paper));
+  color: hsl(var(--ink));
+  font-family: var(--font-manrope), sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto min-h-screen max-w-[1440px] px-5 py-5 sm:px-8 lg:px-12;
+  }
+  .panel {
+    @apply border bg-white/70 shadow-soft dark:bg-white/[.04];
+    border-radius: 10px;
+  }
+  .dark .panel {
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.16);
+  }
+  .icon-button {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-full border bg-white/60 transition hover:-translate-y-0.5 hover:bg-white dark:bg-white/[.06] dark:hover:bg-white/[.11];
+  }
+  .button-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-paper transition hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .button-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition hover:bg-black/[.04] dark:hover:bg-white/[.07];
+  }
+  .field {
+    @apply mt-2 w-full rounded-xl border bg-white/70 px-4 py-3 text-sm outline-none transition focus:border-lime focus:ring-2 focus:ring-lime/20 dark:bg-white/[.04];
+  }
+  .label {
+    @apply text-xs font-bold uppercase tracking-[.14em] text-muted;
+  }
+}
+
+.heatmap-scroll {
+  scrollbar-width: thin;
+}
+
+.heat-cell {
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+}
+
+.heat-months {
+  @apply flex gap-4;
+}
+
+.heat-month {
+  @apply flex flex-col gap-2;
+}
+
+.heat-month-label {
+  @apply text-center text-[10px] font-bold uppercase tracking-wider text-muted;
+}
+
+.heat-month-columns {
+  @apply flex gap-1;
+}
+
+.heat-tooltip {
+  @apply pointer-events-none absolute z-30 max-w-56 rounded-lg bg-ink px-3 py-2 text-[11px] font-semibold leading-4 normal-case tracking-normal text-paper opacity-0 shadow-lg transition-opacity group-hover:opacity-100;
+  width: max-content;
+}
+
+.heat-tooltip-above {
+  @apply bottom-full left-1/2 mb-2 -translate-x-1/2;
+}
+
+.heat-tooltip-below {
+  @apply left-1/2 mt-2 -translate-x-1/2;
+}
+
+.heat-tooltip-left {
+  @apply bottom-1/2 right-full mr-2 translate-y-1/2;
+}
+
+.heat-tooltip-right {
+  @apply bottom-1/2 left-full ml-2 translate-y-1/2;
+}
+
+@media (max-width: 640px) {
+  .heat-cell {
+    width: 10px;
+    height: 10px;
+  }
+}
